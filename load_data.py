@@ -11,6 +11,7 @@ Usage:
 
 import csv
 import sys
+import sqlite3
 
 SUBJECT_COLS = ["project", "condition", "age", "sex", "treatment", "response"]
 SAMPLE_COLS = ["sample", "subject", "sample_type", "time_from_treatment_start"]

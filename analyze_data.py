@@ -105,14 +105,16 @@ def main():
             GROUP BY sample HAVING ABS(SUM(percentage) - 100) > 1e-6
         """).fetchall()
     if percentage_error:
-        print(f"\nWARNING: {len(bad)} sample(s) whose percentages do not sum to 100 "
-              f"(likely samples with NULL counts): {bad[:5]}")
+        print(f"\nWARNING: {len(percentage_error)} sample(s) whose percentages do not sum to 100 "
+              f"(likely samples with NULL counts): {percentage_error[:5]}")
     else:
         print("\nCheck passed: percentages sum to 100 for every sample.")
 
 
+
+
     # Part 3: report significant differences in cell relfreq for miraclib responders v. non-responders
-    
+
 
     # Part 4: stats on melanoma PBMC samples at baseline
 

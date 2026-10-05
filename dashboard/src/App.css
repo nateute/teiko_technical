@@ -1,0 +1,34 @@
+:root {
+  --bg: #fff; --fg: #1a1a1a; --muted: #6b7280; --border: #e5e7eb;
+  --head: #f3f4f6; --accent: #3b82f6; --bar: rgba(59, 130, 246, 0.22);
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #111418; --fg: #e5e7eb; --muted: #9ca3af; --border: #2b313a; --head: #1b2027; --bar: rgba(96, 165, 250, 0.3); --accent: #60a5fa; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
+.wrap { max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; }
+h1 { margin: 0 0 4px; font-size: 1.5rem; }
+.muted { color: var(--muted); font-size: 0.9rem; }
+.error { color: #dc2626; font-family: monospace; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin: 20px 0; }
+.card { border: 1px solid var(--border); border-radius: 8px; padding: 12px; }
+.card-label { font-size: 0.8rem; color: var(--muted); }
+.card-value { font-size: 1.5rem; font-weight: 600; }
+.card-sub { font-size: 0.75rem; color: var(--muted); }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+input, select, button { font: inherit; padding: 6px 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--fg); }
+input[type="search"] { flex: 1; min-width: 180px; }
+button:disabled { opacity: 0.4; }
+.table-scroll { overflow-x: auto; border: 1px solid var(--border); border-radius: 8px; }
+table { width: 100%; border-collapse: collapse; }
+th, td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+th { background: var(--head); cursor: pointer; user-select: none; position: sticky; top: 0; }
+th:hover { color: var(--accent); }
+tbody tr:last-child td { border-bottom: none; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.pct { position: relative; min-width: 140px; }
+.bar { position: absolute; left: 0; top: 2px; bottom: 2px; background: var(--bar); border-radius: 0 4px 4px 0; }
+.pct-text { position: relative; }
+.pager { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 12px; }
+.pager .muted { margin-right: auto; }
