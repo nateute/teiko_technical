@@ -1,4 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
+import BoxplotPanel from "./BoxplotPanel.jsx";
+import CohortPanel from "./CohortPanel.jsx";
 
 const COLUMNS = [
   { key: "sample", label: "Sample", numeric: false },
@@ -100,6 +102,8 @@ export default function App() {
         {new Set(rows.map((r) => r.sample)).size} samples · {rows.length} rows
       </p>
 
+      <div className="layout">
+      <div className="left">
       <section className="cards">
         {summary.map((s) => (
           <div className="card" key={s.pop}>
@@ -173,6 +177,13 @@ export default function App() {
         <span>Page {safePage + 1} / {pageCount}</span>
         <button disabled={safePage >= pageCount - 1} onClick={() => setPage(safePage + 1)}>Next ›</button>
       </footer>
+      </div>
+
+      <aside className="right">
+        <BoxplotPanel />
+        <CohortPanel />
+      </aside>
+      </div>
     </main>
   );
 }

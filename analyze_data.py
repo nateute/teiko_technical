@@ -1,23 +1,21 @@
 #!/usr/bin/env python3
 """
-Part 2: Compute relative frequencies of each cell population per sample, write them to
+Compute relative frequencies of each cell population per sample, write them to
 a `relative_frequencies` table, and print a summary.
-
-Part 3:
-
-Part 4:
 
 Usage:
     python analyze_data.py
 """
 
 import sqlite3
-import sys
 
 POPULATIONS = ["b_cell", "cd8_t_cell", "cd4_t_cell", "nk_cell", "monocyte"]
 
 db_path = "cell-count.db"
 
+# --------------------------------------------------------------------------- #
+# Schema
+# --------------------------------------------------------------------------- #
 # Step 1: pull sample + counts and compute total_count per sample.
 # NULL counts are treated as 0 for the total.
 # Step 2: unpivot (wide -> long) with one SELECT per population, then compute
@@ -56,11 +54,15 @@ CREATE INDEX idx_relfreq_population ON relative_frequencies(population);
 """
 
 
-
+# --------------------------------------------------------------------------- #
+# Application Entry point
+# --------------------------------------------------------------------------- #
 def main():
-    # Part 2: determine the relative frequency of each cell type in each sample.
-    # This results in a summary table with n_samples*n_cell_populations rows and columns:
-    #   sample, total_count, population, count, percentage
+    """
+    Part 2: determine the relative frequency of each cell type in each sample.
+    This results in a summary table with n_samples*n_cell_populations rows and columns:
+    sample, total_count, population, count, percentage
+    """
     conn = sqlite3.connect(db_path)
     conn.execute("PRAGMA foreign_keys = ON;")
 
@@ -113,15 +115,7 @@ def main():
 
 
 
-    # Part 3: report significant differences in cell relfreq for miraclib responders v. non-responders
-
-
-    # Part 4: stats on melanoma PBMC samples at baseline
-
     conn.close()
 
 if __name__ == "__main__":
     main()
-
-
-

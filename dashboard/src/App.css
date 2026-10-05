@@ -7,7 +7,7 @@
 }
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--bg); color: var(--fg); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; }
-.wrap { max-width: 1000px; margin: 0 auto; padding: 24px 16px 48px; }
+.wrap { max-width: 1600px; margin: 0 auto; padding: 24px 16px 48px; }
 h1 { margin: 0 0 4px; font-size: 1.5rem; }
 .muted { color: var(--muted); font-size: 0.9rem; }
 .error { color: #dc2626; font-family: monospace; }
@@ -32,3 +32,51 @@ tbody tr:last-child td { border-bottom: none; }
 .pct-text { position: relative; }
 .pager { display: flex; align-items: center; justify-content: flex-end; gap: 12px; margin-top: 12px; }
 .pager .muted { margin-right: auto; }
+
+/* two-column layout: table left; right column = boxplot panel, then a reserved tile slot below it */
+.layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 24px; align-items: start; margin-top: 16px; }
+.left { min-width: 0; }
+.right { min-width: 0; display: flex; flex-direction: column; gap: 16px; }
+@media (max-width: 1000px) {
+  .layout { grid-template-columns: 1fr; }
+  .right { order: -1; }
+}
+.cards { margin-top: 0; }
+
+/* boxplot panel: chart gets up to ~a screen of height; test cards sit below it */
+.panel { border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; display: flex; flex-direction: column; }
+.panel select.full { width: 100%; }
+.panel-row { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 6px; }
+.panel-row select { flex: 1 1 150px; min-width: 0; }
+.panel h2 { margin: 2px 0 0; font-size: 1rem; }
+.panel .small { margin: 0; }
+.seg { display: inline-flex; }
+.seg button { border-radius: 0; margin-left: -1px; padding: 6px 8px; font-size: 0.82rem; }
+.seg button:first-child { border-radius: 6px 0 0 6px; margin-left: 0; }
+.seg button:last-child { border-radius: 0 6px 6px 0; }
+.seg button.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.panel-body { display: flex; flex-direction: column; gap: 10px; margin-top: 6px; }
+.chart-wrap { min-width: 0; height: clamp(380px, calc(100vh - 260px), 820px); }
+.chart-wrap svg { width: 100%; height: 100%; }
+.side { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem; }
+.side > .check, .side > .small { grid-column: 1 / -1; }
+.check { display: flex; align-items: center; gap: 6px; font-size: 0.82rem; color: var(--muted); }
+.test-card { border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px; line-height: 1.45; font-variant-numeric: tabular-nums; }
+.test-card.on { border-color: var(--accent); background: var(--head); }
+.small { font-size: 0.72rem; }
+
+@media (max-width: 1000px) { .chart-wrap { height: 380px; } }
+
+/* baseline cohort panel */
+.cohort h2 { margin: 0; font-size: 1.05rem; }
+.cohort-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 12px; }
+.cohort-total { font-size: 1.4rem; font-weight: 700; font-variant-numeric: tabular-nums; }
+.cohort-total span { font-size: 0.85rem; font-weight: 400; color: var(--muted); }
+.cohort-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 16px; margin-top: 12px; }
+.cohort-grid h3 { margin: 0 0 6px; font-size: 0.85rem; color: var(--muted); font-weight: 600; }
+.bars { display: flex; flex-direction: column; gap: 6px; }
+.bar-row { display: grid; grid-template-columns: minmax(70px, 40%) 1fr; align-items: center; gap: 8px; font-size: 0.8rem; }
+.bar-label { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.bar-track { position: relative; height: 20px; background: var(--head); border-radius: 4px; }
+.bar-fill { height: 100%; border-radius: 4px; min-width: 2px; }
+.bar-value { position: absolute; left: 6px; top: 0; line-height: 20px; font-variant-numeric: tabular-nums; font-size: 0.75rem; white-space: nowrap; }
