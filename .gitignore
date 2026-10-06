@@ -1,0 +1,5 @@
+bin
+.venv
+.idea
+*.db
+dashboard/node_modules
